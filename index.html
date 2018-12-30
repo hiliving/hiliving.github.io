@@ -31,8 +31,22 @@
   
   
    <script>
-    function openapp(){
-            window.location.href = 'zmovie://zhost/bt/open?data=mydata'; 
+
+    
+     function openapp() {
+      
+            if (/android/i.test(navigator.userAgent)) {  
+                 var isrefresh = getUrlParam('refresh'); // 获得refresh参数  
+                 if(isrefresh == 1) {  
+                 	window.location.href='https://fir.im/btmovie';
+                     return  
+                 }  
+                 window.location.href = 'zmovie://zhost/bt/open?data=mydata';  
+                 window.setTimeout(function () {  
+                         window.location.href += '&refresh=1' // 附加一个特殊参数，用来标识这次刷新不要再调用myapp:// 了  
+                 }, 500);  
+             }  
+      
     }
 </script>
   
