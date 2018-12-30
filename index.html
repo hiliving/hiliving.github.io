@@ -38,29 +38,31 @@
   
    <script>
    
-     var id ="";       
-    var userAgent = navigator.userAgent ;
-	var url="zmovie://zhost/bt/open?data=mydata",downUrl="https://fir.im/btmovie";
-	if(userAgent.indexOf("Android")>-1){
-	    url='zmovie://zhost/bt/open?data='+id;//安卓版App地址，由安卓同事提供
-	    downUrl="https://fir.im/btmovie"; //安卓版App下载地址，由安卓同事提供
-	}else{
-	    url='XXXXXX://';//IOS版App地址，由IOS同事提供
-	    downUrl="https://fir.im/btmovie"; //IOS版App下载地址，由IOS同事提供
-	}
-	function test(){
-	    window.location.href = url;
-			    setTimeout(function(){
-			        window.location.href = downUrl;
-			    },2000)
-	}
-	function init(ids){
-		id = ids;
-	}
+     
+	
     
 </script>
   
   <script>
+  	
+		  	var id ="";       
+		    var userAgent = navigator.userAgent ;
+			var url="zmovie://zhost/bt/open?data=mydata",downUrl="https://fir.im/btmovie";
+			if(userAgent.indexOf("Android")>-1){
+			    url='zmovie://zhost/bt/open?data='+encodeURIComponent(id);//安卓版App地址，由安卓同事提供
+			    downUrl="https://fir.im/btmovie"; //安卓版App下载地址，由安卓同事提供
+			}else{
+			    url='XXXXXX://';//IOS版App地址，由IOS同事提供
+			    downUrl="https://fir.im/btmovie"; //IOS版App下载地址，由IOS同事提供
+			}
+			function test(){
+			    window.location.href = url;
+					    setTimeout(function(){
+					        window.location.href = downUrl;
+					    },2000)
+			}
+  	
+  	
 		  function getQueryString(name) { 
 		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
 		    var r = window.location.search.substr(1).match(reg); 
@@ -73,9 +75,7 @@
 		    document.querySelector('#img').src = decodeURIComponent(getQueryString('i')) || ''
 		    document.querySelector('#title').innerHTML = decodeURI(getQueryString('t')) || ''
 		    document.querySelector('#desc').innerHTML = decodeURI(getQueryString('d')) || ''
-		    
-		    
-		    init(decodeURI(getQueryString('id')))
+		    id = decodeURIComponent(getQueryString('i'));
 		  }
 		  
 		  
