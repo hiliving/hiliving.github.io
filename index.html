@@ -38,11 +38,11 @@
   
    <script>
    
-            
+     var id ="";       
     var userAgent = navigator.userAgent ;
 	var url="zmovie://zhost/bt/open?data=mydata",downUrl="https://fir.im/btmovie";
 	if(userAgent.indexOf("Android")>-1){
-	    url='zmovie://zhost/bt/open?data=mydata';//安卓版App地址，由安卓同事提供
+	    url='zmovie://zhost/bt/open?data='+id;//安卓版App地址，由安卓同事提供
 	    downUrl="https://fir.im/btmovie"; //安卓版App下载地址，由安卓同事提供
 	}else{
 	    url='XXXXXX://';//IOS版App地址，由IOS同事提供
@@ -53,6 +53,9 @@
 			    setTimeout(function(){
 			        window.location.href = downUrl;
 			    },2000)
+	}
+	function init(ids){
+		id = ids;
 	}
     
 </script>
@@ -70,6 +73,9 @@
 		    document.querySelector('#img').src = decodeURIComponent(getQueryString('i')) || ''
 		    document.querySelector('#title').innerHTML = decodeURI(getQueryString('t')) || ''
 		    document.querySelector('#desc').innerHTML = decodeURI(getQueryString('d')) || ''
+		    document.querySelector('#desc').innerHTML = decodeURI(getQueryString('id')) || ''
+		    
+		    init(decodeURI(getQueryString('id')))
 		  }
 		  
 		  
