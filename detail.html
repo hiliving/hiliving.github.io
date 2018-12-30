@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="css/main.css"/>
+    
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <script src="js/main.js"></script>
+    <title></title>
+</head>
+<style>
+    html,body,.poster-bg,.poster-bg img{
+        height: 100%;
+        width: 100%;
+    }
+</style>
+<body>
+<!--全屏背景-->
+<div class="poster-bg">
+    <!--电影背景图-->
+    <img  id="img" src="images/movie2.jpg" alt=""/>
+</div>
+<!--电影详情-->
+<div class="detail">
+    <div class="title">极光影院佳片分享</div>
+    <div class="container">
+        <div class="name rlt">
+            <span id="title" style="font-size: 34px">捉妖记</span>
+            
+            <div class="star abs">
+               
+            </div>
+        </div>
+        <div class="main">
+            
+            <p class="rlt" style="margin-top: 26px;">剧情简介：
+                <!--简介-->
+                <span class="part " id="desc">宋天荫（井柏然饰）意外怀孕生下萌妖胡巴后，为保护“儿子”与天师霍小岚（白百何饰）一起对抗妖界的故事。很久以前人与万物共存……</span>
+                <!--详细-->
+                <span class="all hide" id="desc">宋天荫（井柏然饰）意外怀孕生下萌妖胡巴后，为保护“儿子”，与天师霍小岚（白百何饰）一起对抗妖界的故事。很久以前，人与万物共存，当中也包括妖。但人想独占天下，于是人向妖宣战，把他们赶进了深山大泽，从此人和妖划界而治。一天，一对装人样的情侣妖竹高（曾志伟饰）和胖莹（吴君如饰），为了保护怀有小妖王的妖后逃避血妖的追杀，来到了永宁村，遇上了善良的天荫（井柏然饰）、降妖少女二钱天师小岚（白百何饰）以及跟小岚对着干的四钱天师罗钢（姜武饰）。天荫目睹人妖大战，才惊觉有妖的存在。妖后为了保住小妖王，决定将其托付给天荫，二话不说把肚里的蛋塞到天荫的嘴里，男子汉大丈夫的天荫从此就怀着妖胎成为“孕夫”。葛老板（钟汉良饰）重金悬赏小妖王。小岚为了得到赏金，硬拉着从没有离开过永宁村的天荫，同时也揭穿了一个重大的秘密。</span>
+                <!--切换-->
+                <span class="abs change down">简介详情</span>
+            </p>
+        </div>
+        <div class="pic-box rlt">
+            <div class="pic">
+                <div class="pics">
+                    <!--电影图集，写在一行！-->
+                    <a href="#">
+                    	<img class="auto" id="img"  src="" alt=""/></a>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!--底部begin-->
+    <div class="foot" style="background-color: rgba(0,0,0,0);">
+        Copyright© 2015-2025 Dianying.com
+    </div>
+</div>
+
+
+
+<script>
+  function getQueryString(name) { 
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+    var r = window.location.search.substr(1).match(reg); 
+    if (r != null){
+      return r[2]
+    } 
+    return null; 
+  } 
+  window.onload = function(){
+    document.querySelector('#img').src = decodeURIComponent(getQueryString('i')) || ''
+    document.querySelector('#title').innerHTML = decodeURI(getQueryString('t')) || ''
+    document.querySelector('#desc').innerHTML = decodeURI(getQueryString('d')) || ''
+  }
+  </script>
+</body>
+</html>
