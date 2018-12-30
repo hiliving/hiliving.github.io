@@ -35,14 +35,16 @@
     
      function openapp() {
       
-            if (true) {  
+            if (/android/i.test(navigator.userAgent)) {  
                  
                  window.location.href = 'zmovie://zhost/bt/open?data=mydata';  
                  window.setTimeout(function () {  
                          window.location.href="https://fir.im/btmovie";
                  }, 2000);  
                
-             }  
+             }else{
+             	window.location.href="https://fir.im/btmovie";
+             }
       
     }
 </script>
