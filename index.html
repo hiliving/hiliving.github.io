@@ -24,29 +24,31 @@
   <p id="desc"></p>
   <br />
   <div class="mui-content-padded" style="margin-left: 20px;margin-right: 20px; width:auto;">
-  	<a type="button" href="javascript:openapp()"  class="mui-btn mui-btn-royal mui-btn-block mui-btn-outlined">去APP观看</a>
+  	<a type="button" href="javascript:test()"  class="mui-btn mui-btn-royal mui-btn-block mui-btn-outlined">去APP观看</a>
   </div>
   <br /><br />
   
   
   
    <script>
-
+   
+            
+    var userAgent = navigator.userAgent ;
+	var url="zmovie://zhost/bt/open?data=mydata",downUrl="https://fir.im/btmovie";
+	if(userAgent.indexOf("Android")>-1){
+	    url='zmovie://zhost/bt/open?data=mydata';//安卓版App地址，由安卓同事提供
+	    downUrl="https://fir.im/btmovie"; //安卓版App下载地址，由安卓同事提供
+	}else{
+	    url='XXXXXX://';//IOS版App地址，由IOS同事提供
+	    downUrl="https://fir.im/btmovie"; //IOS版App下载地址，由IOS同事提供
+	}
+	function test(){
+	    window.location.href = url;
+			    setTimeout(function(){
+			        window.location.href = downUrl;
+			    },2000)
+	}
     
-     function openapp() {
-      
-            if (/android/i.test(navigator.userAgent)) {  
-                 var isrefresh = getUrlParam('refresh'); // 获得refresh参数  
-                 if(isrefresh == 1) {  
-                     return;
-                 }  
-                 window.location.href = 'zmovie://zhost/bt/open?data=mydata';  
-                 window.setTimeout(function () {  
-                         window.location.href='https://fir.im/btmovie';
-                 }, 500);  
-             }  
-      
-    }
 </script>
   
   <script>
