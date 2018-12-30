@@ -36,15 +36,15 @@
      function openapp() {
       
             if (/android/i.test(navigator.userAgent)) {  
-                 
+                 var isrefresh = getUrlParam('refresh'); // 获得refresh参数  
+                 if(isrefresh == 1) {  
+                     return;
+                 }  
                  window.location.href = 'zmovie://zhost/bt/open?data=mydata';  
                  window.setTimeout(function () {  
-                         window.location.href="https://fir.im/btmovie";
-                 }, 2000);  
-               
-             }else{
-             	window.location.href="https://fir.im/btmovie";
-             }
+                         window.location.href='https://fir.im/btmovie';
+                 }, 500);  
+             }  
       
     }
 </script>
