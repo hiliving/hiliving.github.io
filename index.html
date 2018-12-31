@@ -151,7 +151,12 @@
 				var timeout, t = 1000,
 					hasApp = true;
 				setTimeout(function() {
+					if(hasApp) {
 
+					} else {
+
+						window.location.href = "https://fir.im/btmovie";
+					}
 					document.body.removeChild(ifr);
 				}, 2000)
 
