@@ -12,7 +12,7 @@
   <style>
     .img{width:50%;margin:auto;padding-top:3rem;}
     #title{text-align:center;font-size: 24px;-webkit-text-fill-color: #4d4d4d}
-    #desc{padding-left: 20px;padding-right:20px;line-height:1.6;-webkit-text-fill-color: #4d4d4d;font-size: 16px;}
+    #desc{padding-left: 20px;padding-right:20px;line-height:1.6;-webkit-text-fill-color: #5b5b5b;font-size: 15px;}
   </style>
 </head>
 <body style="background: #FFFFFF;">
@@ -29,7 +29,7 @@
   <div class="mui-content-padded" style="margin-left: 20px;margin-right: 20px; width:auto;">
   	<a type="button" href="javascript:test()"  class="mui-btn mui-btn-royal mui-btn-block mui-btn-outlined">去APP观看</a>
   	<br />
-  	<a style="font-size: 12px;-webkit-text-fill-color: darkgray;"> 若是微信打开，请点击右上角，从浏览器打开此页面，如果已安装极光影院，可直接到对应页面</a>
+  	<a id="tip" style="font-size: 12px;-webkit-text-fill-color: darkgray;"> </a>
   </div>
   <br /><br />
   
@@ -45,6 +45,11 @@
   
   <script>
   	
+  	
+  			 var isWeixin = function () { //判断是否是微信
+				    var ua = navigator.userAgent.toLowerCase();
+			    		return ua.match(/MicroMessenger/i) == "micromessenger";
+				};
 		 
   			var  id ="";
   	
@@ -61,6 +66,10 @@
 		    document.querySelector('#title').innerHTML = decodeURI(getQueryString('t')) || ''
 		    document.querySelector('#desc').innerHTML = decodeURI(getQueryString('d')) || ''
 		  	 id = decodeURI(getQueryString('id'))
+		  	 
+		  	if(isWeixin()){
+		  		document.querySelector('#tip').innerHTML="若是微信打开，请点击右上角，从浏览器打开此页面，如果已安装极光影院，可直接到对应页面"
+		  	}
 		  }
 		        
 		    var userAgent = navigator.userAgent ;
@@ -73,10 +82,13 @@
 			    downUrl="https://fir.im/btmovie"; //IOS版App下载地址，由IOS同事提供
 			}
 			function test(){
-			    window.location.href = 'zmovie://zhost/bt/open?data='+encodeURIComponent(id);;
+				if(navigator.userAgent.match(/android/i)){
+					  window.location.href = 'zmovie://zhost/bt/open?data='+encodeURIComponent(id);;
 					    setTimeout(function(){
 					        window.location.href = downUrl;
 					    },2000)
+				}
+			  
 			}
 		  
 		  
