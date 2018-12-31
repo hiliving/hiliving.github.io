@@ -20,33 +20,39 @@
 			#title {
 				text-align: center;
 				font-size: 24px;
-				-webkit-text-fill-color: #4d4d4d
+				-webkit-text-fill-color: white
 			}
 			
 			#desc {
 				padding-left: 20px;
 				padding-right: 20px;
 				line-height: 1.6;
-				-webkit-text-fill-color: #5b5b5b;
+				-webkit-text-fill-color: white;
 				font-size: 15px;
 			}
+			
 		</style>
 	</head>
 
 	<body style="background: #FFFFFF;">
-		<!--全屏背景-->
-		<a id="tip" style="font-size: 12px;-webkit-text-fill-color: darkgray;margin: 10px;"> </a>
+		<div class="poster-bg">
+			<!--电影背景图-->
+			<img id="bg" src="images/timg-6.jpeg" alt="" />
+		</div>
+		<a id="tip" style="font-size: 12px;-webkit-text-fill-color: white;margin: 10px;"> </a>
 		<br />
-		<div class="img">
-			<img id="img" width="100%" src="" alt="">
+		<div class="zmovie-card-content">
+			<div class="img">
+				<img id="img" width="100%" src="" alt="">
+			</div>
+			<br />
+			<h2 id="title"></h2>
+			<br />
+			<p id="desc"></p>
 		</div>
 		<br />
-		<h2 id="title"></h2>
-		<br />
-		<p id="desc"></p>
-		<br />
-		<div class="mui-content-padded" style="margin-left: 20px;margin-right: 20px; width:auto;">
-			<a type="button" href="javascript:test()" class="mui-btn mui-btn-royal mui-btn-block mui-btn-outlined">去APP观看</a>
+		<div class="mui-spadded" style="margin-left: 20px;margin-right: 20px; width:auto;">
+			<a type="button" href="javascript:test()" class="mui-btn mui-btn-royal mui-btn-block">去APP观看</a>
 			<br />
 
 		</div>
