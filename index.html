@@ -107,14 +107,22 @@
 				
 				if(isWeixin()) {
 					alert("微信不支持直接跳转，请点击右上角从浏览器打开！");
+					if(navigator.userAgent.match(/android/i)) {
+					window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
+					setTimeout(function() {
+						window.location.href = downUrl;
+					}, 5000)
 				}
-				
-				if(navigator.userAgent.match(/android/i)) {
+				}else{
+					if(navigator.userAgent.match(/android/i)) {
 					window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
 					setTimeout(function() {
 						window.location.href = downUrl;
 					}, 2000)
 				}
+				}
+				
+				
 
 			}
 		</script>
