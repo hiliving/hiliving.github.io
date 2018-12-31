@@ -100,17 +100,11 @@
 				if(isWeixin()) {
 					alert("微信不支持直接跳转，请点击右上角从浏览器打开！");
 					if(navigator.userAgent.match(/android/i)) {
-						testApp('zmovie://zhost/bt/open?data=' + encodeURIComponent(id))
-						//						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
-						//						setTimeout(function() {
-						//							//						window.location.href = downUrl;
-						//						}, 5000)
+						//testApp('zmovie://zhost/bt/open?data=' + encodeURIComponent(id))					
 					}
 				} else {
 					if(navigator.userAgent.match(/android/i)) {
-
 						console.log(id)
-						//						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
 						testApp('zmovie://zhost/bt/open?data=' + encodeURIComponent(id))
 
 					}
