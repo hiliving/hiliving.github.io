@@ -81,23 +81,8 @@
 				document.querySelector('#img').src = decodeURIComponent(getQueryString('i')) || ''
 				document.querySelector('#title').innerHTML = decodeURIComponent(getQueryString('t')) || ''
 				document.querySelector('#desc').innerHTML = decodeURIComponent(getQueryString('d')) || ''
-				var id = decodeURI(getQueryString('id'))
-				
-				$.ajax({
-						type: "GET",
-						url: "http://123.207.150.253/ygcms/getKeyShare.php?md5id="+id,
-						dataType: "json",
-						success: function(data) {
-							document.querySelector('#img').src=data.Data[0].downimgurl.split(',')[0]
-							document.querySelector('#title').innerHTML =data.Data[0].downLoadName
-							document.querySelector('#desc').innerHTML=data.Data[0].mvdesc
-						
-						},
-						error: function(jqXHR) {
-							console.log(jqXHR.arguments)
-						},
-					});
-				
+				id = decodeURI(getQueryString('id'))
+
 				if(isWeixin()) {
 					document.querySelector('#tip').innerHTML = "若已安装极光影院,请点击右上角从浏览器打开此页面,可直接到对应页面"
 				}
@@ -133,12 +118,28 @@
 					}
 				}
 			}
-			
-			//ajax请求接口数据，返回刷新页面，避免了在url中携带大量数据的问题
+		</script>
 
-			function getData(dataid){
-				
-			}
+		<script>
+			$(document).ready(function() {
+						function() {
+							var ids = decodeURI(getQueryString('id'))
+							$.ajax({
+								type: "GET",
+								url: "http://123.207.150.253/ygcms/getKeyShare.php?md5id=" + ids,
+								dataType: "json",
+								success: function(data) {
+									document.querySelector('#img').src = data.Data[0].downimgurl.split(',')[0]
+									document.querySelector('#title').innerHTML = data.Data[0].downLoadName
+									document.querySelector('#desc').innerHTML = data.Data[0].mvdesc
+
+								},
+								error: function(jqXHR) {
+									console.log(jqXHR.arguments)
+								},
+							});
+						}
+					}
 		</script>
 	</body>
 
