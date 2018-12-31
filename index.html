@@ -136,7 +136,11 @@
 					success: function(data) {
 						document.querySelector('#img').src = data.Data[0].downimgurl.split(',')[0]
 						document.querySelector('#title').innerHTML = data.Data[0].downLoadName
-						document.querySelector('#desc').innerHTML = data.Data[0].mvdesc
+						var desc = data.Data[0].mvdesc
+						if (desc.indexOf("◎") != -1 ) {
+							desc =desc.substring(desc.lastIndexOf("◎")+1)
+						}
+						document.querySelector('#desc').innerHTML = desc
 					},
 					error: function(jqXHR) {
 
