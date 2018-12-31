@@ -100,21 +100,19 @@
 				if(isWeixin()) {
 					alert("微信不支持直接跳转，请点击右上角从浏览器打开！");
 					if(navigator.userAgent.match(/android/i)) {
-
-						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
-						setTimeout(function() {
-							//						window.location.href = downUrl;
-						}, 5000)
+						testApp('zmovie://zhost/bt/open?data=' + encodeURIComponent(id))
+						//						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
+						//						setTimeout(function() {
+						//							//						window.location.href = downUrl;
+						//						}, 5000)
 					}
 				} else {
 					if(navigator.userAgent.match(/android/i)) {
 
 						console.log(id)
-						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
-						setTimeout(function() {
-							window.location.href = downUrl;
-							console.log(mvid)
-						}, 2000)
+						//						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
+						testApp('zmovie://zhost/bt/open?data=' + encodeURIComponent(id))
+
 					}
 				}
 			}
@@ -137,8 +135,8 @@
 						document.querySelector('#img').src = data.Data[0].downimgurl.split(',')[0]
 						document.querySelector('#title').innerHTML = data.Data[0].downLoadName
 						var desc = data.Data[0].mvdesc
-						if (desc.indexOf("◎") != -1 ) {
-							desc =desc.substring(desc.lastIndexOf("◎")+1)
+						if(desc.indexOf("◎") != -1) {
+							desc = desc.substring(desc.lastIndexOf("◎") + 1)
 						}
 						document.querySelector('#desc').innerHTML = desc
 					},
@@ -147,6 +145,27 @@
 						console.log(jqXHR.arguments)
 					},
 				});
+			}
+
+			function testApp(url) {
+				var timeout, t = 1000,
+					hasApp = true;
+				setTimeout(function() {
+
+					document.body.removeChild(ifr);
+				}, 2000)
+
+				var t1 = Date.now();
+				var ifr = document.createElement("iframe");
+				ifr.setAttribute('src', url);
+				ifr.setAttribute('style', 'display:none');
+				document.body.appendChild(ifr);
+				timeout = setTimeout(function() {
+					var t2 = Date.now();
+					if(!t1 || t2 - t1 < t + 100) {
+						hasApp = false;
+					}
+				}, t);
 			}
 		</script>
 	</body>
