@@ -81,7 +81,7 @@
 				document.querySelector('#img').src = decodeURIComponent(getQueryString('i')) || ''
 				document.querySelector('#title').innerHTML = decodeURIComponent(getQueryString('t')) || ''
 				document.querySelector('#desc').innerHTML = decodeURIComponent(getQueryString('d')) || ''
-				id = decodeURI(getQueryString('id'))
+				var id = decodeURI(getQueryString('id'))
 				getData(id);
 				if(isWeixin()) {
 					document.querySelector('#tip').innerHTML = "若已安装极光影院,请点击右上角从浏览器打开此页面,可直接到对应页面"
