@@ -78,8 +78,6 @@
 				return null;
 			} 
 			window.onload = function() {
-				
-				
 
 				if(isWeixin()) {
 					document.querySelector('#tip').innerHTML = "若已安装极光影院,请点击右上角从浏览器打开此页面,可直接到对应页面"
@@ -98,50 +96,50 @@
 			}
 
 			function test() {
-				var mvid = decodeURI(getQueryString('id'))
+
 				if(isWeixin()) {
 					alert("微信不支持直接跳转，请点击右上角从浏览器打开！");
 					if(navigator.userAgent.match(/android/i)) {
-						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(mvid);;
+						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(decodeURI(getQueryString('id')));;
 						setTimeout(function() {
 							//						window.location.href = downUrl;
 						}, 5000)
 					}
 				} else {
 					if(navigator.userAgent.match(/android/i)) {
-						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(mvid);;
+						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(decodeURI(getQueryString('id')));;
 						setTimeout(function() {
 							window.location.href = downUrl;
+							console.log(mvid)
 						}, 2000)
 					}
 				}
 			}
 		</script>
 
-		
 		<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
 		<script>
 			$(document).ready(function() {
 				getData();
 			});
 
-			function getData(){
+			function getData() {
 				var ids = decodeURI(getQueryString('id'))
-//				ids="6262f8c36ea75492c38980dac83ecb87"
+				//				ids="6262f8c36ea75492c38980dac83ecb87"
 				$.ajax({
-						type: "GET",
-						url: "http://123.207.150.253/ygcms/getKeyShare.php?md5id="+ids,
-						dataType: "json",
-						success: function(data) {
-							document.querySelector('#img').src = data.Data[0].downimgurl.split(',')[0]
-									document.querySelector('#title').innerHTML = data.Data[0].downLoadName
-									document.querySelector('#desc').innerHTML = data.Data[0].mvdesc
-						},
-						error: function(jqXHR) {
-							
-							console.log(jqXHR.arguments)
-						},
-					});
+					type: "GET",
+					url: "http://123.207.150.253/ygcms/getKeyShare.php?md5id=" + ids,
+					dataType: "json",
+					success: function(data) {
+						document.querySelector('#img').src = data.Data[0].downimgurl.split(',')[0]
+						document.querySelector('#title').innerHTML = data.Data[0].downLoadName
+						document.querySelector('#desc').innerHTML = data.Data[0].mvdesc
+					},
+					error: function(jqXHR) {
+
+						console.log(jqXHR.arguments)
+					},
+				});
 			}
 		</script>
 	</body>
