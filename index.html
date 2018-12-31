@@ -78,9 +78,7 @@
 				return null;
 			} 
 			window.onload = function() {
-				document.querySelector('#img').src = decodeURIComponent(getQueryString('i')) || ''
-				document.querySelector('#title').innerHTML = decodeURIComponent(getQueryString('t')) || ''
-				document.querySelector('#desc').innerHTML = decodeURIComponent(getQueryString('d')) || ''
+				
 				id = decodeURI(getQueryString('id'))
 
 				if(isWeixin()) {
@@ -120,26 +118,31 @@
 			}
 		</script>
 
+		
+		<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
 		<script>
 			$(document).ready(function() {
-						function() {
-							var ids = decodeURI(getQueryString('id'))
-							$.ajax({
-								type: "GET",
-								url: "http://123.207.150.253/ygcms/getKeyShare.php?md5id=" + ids,
-								dataType: "json",
-								success: function(data) {
-									document.querySelector('#img').src = data.Data[0].downimgurl.split(',')[0]
+				getData();
+			});
+
+			function getData(){
+				var ids = decodeURI(getQueryString('id'))
+//				ids="6262f8c36ea75492c38980dac83ecb87"
+				$.ajax({
+						type: "GET",
+						url: "http://123.207.150.253/ygcms/getKeyShare.php?md5id="+ids,
+						dataType: "json",
+						success: function(data) {
+							document.querySelector('#img').src = data.Data[0].downimgurl.split(',')[0]
 									document.querySelector('#title').innerHTML = data.Data[0].downLoadName
 									document.querySelector('#desc').innerHTML = data.Data[0].mvdesc
-
-								},
-								error: function(jqXHR) {
-									console.log(jqXHR.arguments)
-								},
-							});
-						}
-					}
+						},
+						error: function(jqXHR) {
+							
+							console.log(jqXHR.arguments)
+						},
+					});
+			}
 		</script>
 	</body>
 
