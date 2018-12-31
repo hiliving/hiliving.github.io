@@ -83,7 +83,7 @@
 			} 
 			window.onload = function() {
 				document.querySelector('#img').src = decodeURIComponent(getQueryString('i')) || ''
-				document.querySelector('#title').innerHTML = decodeURI(getQueryString('t')) || ''
+				document.querySelector('#title').innerHTML = decodeURIComponent(getQueryString('t')) || ''
 				document.querySelector('#desc').innerHTML = decodeURIComponent(getQueryString('d')) || ''
 				id = decodeURI(getQueryString('id'))
 
