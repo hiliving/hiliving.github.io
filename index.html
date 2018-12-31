@@ -79,7 +79,7 @@
 			} 
 			window.onload = function() {
 				
-				id = decodeURI(getQueryString('id'))
+				
 
 				if(isWeixin()) {
 					document.querySelector('#tip').innerHTML = "若已安装极光影院,请点击右上角从浏览器打开此页面,可直接到对应页面"
@@ -98,18 +98,18 @@
 			}
 
 			function test() {
-
+				var mvid = decodeURI(getQueryString('id'))
 				if(isWeixin()) {
 					alert("微信不支持直接跳转，请点击右上角从浏览器打开！");
 					if(navigator.userAgent.match(/android/i)) {
-						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
+						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(mvid);;
 						setTimeout(function() {
 							//						window.location.href = downUrl;
 						}, 5000)
 					}
 				} else {
 					if(navigator.userAgent.match(/android/i)) {
-						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(id);;
+						window.location.href = 'zmovie://zhost/bt/open?data=' + encodeURIComponent(mvid);;
 						setTimeout(function() {
 							window.location.href = downUrl;
 						}, 2000)
