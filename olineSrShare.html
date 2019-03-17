@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="css/m.css" />
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<title>极光影院-影片分享</title>
+		<style>
+			.img {
+				width: 50%;
+				margin: auto;
+			}
+			
+			#title {
+				text-align: center;
+				font-size: 24px;
+				-webkit-text-fill-color: white
+			}
+			
+			#desc {
+				padding-left: 20px;
+				padding-right: 20px;
+				line-height: 1.6;
+				-webkit-text-fill-color: white;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body style="background: #FFFFFF;">
+		<div class="poster-bg">
+			<!--电影背景图-->
+			<img id="bg" src="images/night.jpg" alt="" style="width: 100%;height: 100%;" />
+		</div>
+		<div style="margin: 20px;">
+			<a id="tip" style="font-size: 12px;-webkit-text-fill-color: white;"> </a>
+		</div>
+
+		<div class="zmovie-card-content">
+			<div class="img">
+				<img id="img" width="100%" src="" alt="">
+			</div>
+			<br />
+			<h2 id="title"></h2>
+			<br />
+			<p id="desc"></p>
+		</div>
+		<br />
+		<div class="mui-spadded" style="margin-left: 20px;margin-right: 20px; width:auto;">
+			<a type="button" href="javascript:test()" class="mui-btn mui-btn-royal mui-btn-block">去APP观看</a>
+			<br />
+
+		</div>
+		<br />
+
+		<script>
+		</script>
+
+		<script>
+			var isWeixin = function() { //判断是否是微信
+				var ua = navigator.userAgent.toLowerCase();
+				return ua.match(/MicroMessenger/i) == "micromessenger";
+			};
+
+			var id = "";
+
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) {
+					return r[2]
+				}
+				return null;
+			} 
+			window.onload = function() {
+
+				if(isWeixin()) {
+					document.querySelector('#tip').innerHTML = "若已安装极光影院,请点击右上角从浏览器打开此页面,可直接到对应页面"
+				}
+			}
+
+			var userAgent = navigator.userAgent;
+			var url = "zmovie://zhost/bt/open?data=mydata",
+				downUrl = "https://fir.im/btmovie";
+			if(userAgent.indexOf("Android") > -1) {
+				url = 'zmovie://zhost/bt/open?data='; //安卓版App地址，由安卓同事提供
+				downUrl = "https://fir.im/btmovie"; //安卓版App下载地址，由安卓同事提供
+			} else {
+				url = 'XXXXXX://'; //IOS版App地址，由IOS同事提供
+				downUrl = "https://fir.im/btmovie"; //IOS版App下载地址，由IOS同事提供
+			}
+
+			function test() {
+				var id = decodeURI(getQueryString('id'))
+				if(isWeixin()) {
+					alert("微信不支持直接跳转，请点击右上角从浏览器打开！");
+					if(navigator.userAgent.match(/android/i)) {
+						//testApp('zmovie://zhost/bt/open?data=' + encodeURIComponent(id))					
+					}
+				} else {
+					if(navigator.userAgent.match(/android/i)) {
+						console.log(id)
+						testApp('zmovie://zhost/bt/open?data=' + encodeURIComponent(id))
+
+					}
+				}
+			}
+		</script>
+
+		<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
+		<script>
+			$(document).ready(function() {
+				getData();
+			});
+
+			function getData() {
+				var ids = decodeURI(getQueryString('id'))
+				//				ids="6262f8c36ea75492c38980dac83ecb87"
+				$.ajax({
+					type: "GET",
+					url: "http://123.207.150.253/ygcms/getOnlineSrKeyShare.php?md5id=" + ids,
+					dataType: "json",
+					success: function(data) {
+						document.querySelector('#img').src = data.Data[0].downimgurl
+						document.querySelector('#title').innerHTML = data.Data[0].downLoadName
+						var desc = data.Data[0].mvdesc.desc
+						var desc = data.Data[0].mvdesc
+						var descstr = JSON.parse(desc).desc
+
+						var head = JSON.parse(desc).header.join('</br>')
+						document.querySelector('#desc').innerHTML = head.concat('</br>简介：').concat(descstr)
+
+					},
+					error: function(jqXHR) {
+
+						console.log(jqXHR.arguments)
+					},
+				});
+			}
+
+			function testApp(url) {
+				var timeout, t = 1000,
+					hasApp = true;
+				setTimeout(function() {
+					if(hasApp) {
+
+					} else {
+
+						window.location.href = "https://fir.im/btmovie";
+					}
+					document.body.removeChild(ifr);
+				}, 2000)
+
+				var t1 = Date.now();
+				var ifr = document.createElement("iframe");
+				ifr.setAttribute('src', url);
+				ifr.setAttribute('style', 'display:none');
+				document.body.appendChild(ifr);
+				timeout = setTimeout(function() {
+					var t2 = Date.now();
+					if(!t1 || t2 - t1 < t + 100) {
+						hasApp = false;
+					}
+				}, t);
+			}
+		</script>
+	</body>
+
+</html>
